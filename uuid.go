@@ -31,15 +31,3 @@ func Generate() (string, error) {
 	hex.Encode(s[24:36], id[10:16])
 	return string(s), nil
 }
-
-// Keep a backward-compatible UUID type with Generate method that delegates to the package Generate.
-// This avoids breaking callers that used uuid.New().Generate().
-
-type UUID struct{}
-
-func New() *UUID { return &UUID{} }
-
-func (u *UUID) Generate() string {
-	s, _ := Generate()
-	return s
-}

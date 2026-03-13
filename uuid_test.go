@@ -28,10 +28,13 @@ func TestGenerateFormatAndBits(t *testing.T) {
 	}
 }
 
-func TestNewGenerateCompatibility(t *testing.T) {
-	u := New()
-	s := u.Generate()
+// Backward-compatibility test removed: legacy New().Generate() API has been removed.
+func TestGenerateSimple(t *testing.T) {
+	s, err := Generate()
+	if err != nil {
+		t.Fatalf("Generate failed: %v", err)
+	}
 	if len(s) != 36 {
-		t.Fatalf("unexpected length from UUID.Generate: %d", len(s))
+		t.Fatalf("unexpected length: %d", len(s))
 	}
 }
